@@ -22,7 +22,7 @@ export default function SignUpPage() {
 function AuthCard() {
   const router = useRouter();
 
-  const [name, setName] = useState("Mohd Zaid");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

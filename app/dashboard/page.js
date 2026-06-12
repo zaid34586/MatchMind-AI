@@ -8,6 +8,7 @@ import { getCurrentUser, logoutUser } from "../lib/auth";
 export default function DashboardPage() {
   const router = useRouter();
   const [user, setUser] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
  useEffect(() => {
   const currentUser = getCurrentUser();
@@ -31,6 +32,46 @@ export default function DashboardPage() {
   return (
     <main className="min-h-screen bg-[#020617] text-white">
       <div className="flex min-h-screen">
+        <div className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-[#020617]/95 px-4 py-4 backdrop-blur-2xl lg:hidden">
+  <div className="flex items-center justify-between">
+    <Link
+      href="/dashboard"
+      className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-violet-400 to-fuchsia-400"
+    >
+      MatchMind AI
+    </Link>
+
+    <button
+      type="button"
+      onClick={() => setMobileMenuOpen((value) => !value)}
+      className="rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-3 font-black"
+    >
+      ☰
+    </button>
+  </div>
+
+  {mobileMenuOpen && (
+    <div className="mt-4 grid grid-cols-2 gap-3">
+      <MobileNavLink href="/dashboard" label="Dashboard" />
+      <MobileNavLink href="/analysis" label="Analysis" />
+      <MobileNavLink href="/worldcup" label="World Cup" />
+      <MobileNavLink href="/community" label="Community" />
+      <MobileNavLink href="/messages" label="Messages" />
+      <MobileNavLink href="/profile" label="Profile" />
+      <MobileNavLink href="/assistant" label="Assistant" />
+      <MobileNavLink href="/history" label="History" />
+      <MobileNavLink href="/settings" label="Settings" />
+
+      <button
+        type="button"
+        onClick={handleLogout}
+        className="rounded-2xl border border-red-400/30 bg-red-500/10 px-4 py-3 font-black text-red-300"
+      >
+        Logout
+      </button>
+    </div>
+  )}
+</div>
         <aside className="hidden w-[310px] border-r border-white/10 bg-[#07111f]/95 p-7 lg:block">
           <Link
             href="/"
@@ -81,7 +122,7 @@ export default function DashboardPage() {
         </aside>
 
         <section className="flex-1 overflow-hidden">
-          <div className="relative min-h-screen p-6 lg:p-10">
+          <div className="relative min-h-screen p-6 pt-24 lg:p-10">
             <Background />
 
             <div className="relative z-10 mx-auto max-w-7xl">
@@ -179,7 +220,16 @@ function SideLink({ href, label, active }) {
     </Link>
   );
 }
-
+function MobileNavLink({ href, label }) {
+  return (
+    <Link
+      href={href}
+      className="rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-3 text-center text-sm font-black text-slate-200"
+    >
+      {label}
+    </Link>
+  );
+}
 function StatCard({ label, value, note }) {
   return (
     <div className="group rounded-[28px] border border-white/10 bg-white/[0.06] p-6 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-sky-400/40 hover:shadow-[0_0_45px_rgba(56,189,248,0.16)]">
