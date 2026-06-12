@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { getCurrentUser } from "../lib/auth";
 
 const PROFILE_KEY = "matchmind-user-profile";
 const STORAGE_KEY = "matchmind-community-posts";
@@ -15,23 +16,6 @@ const defaultProfile = {
 
 const defaultPosts = [
   {
-    id: 1,
-    name: "Zaid",
-    badge: "🇧🇷 Brazil Fan",
-    country: "India",
-    type: "text",
-    imageUrl: "",
-    videoUrl: "",
-    text: "Brazil vs Argentina will be fire today 🔥 I think Argentina has edge but Brazil can surprise.",
-    likes: 18,
-    comments: 2,
-    saved: false,
-    commentList: [
-      "Argentina midfield strong hai.",
-      "Brazil counter attack dangerous hoga.",
-    ],
-  },
-  {
     id: 2,
     name: "Ayan",
     badge: "🇫🇷 France Fan",
@@ -44,6 +28,7 @@ const defaultPosts = [
     likes: 24,
     comments: 1,
     saved: false,
+    liked: false,
     commentList: ["France pace sabse bada weapon hai."],
   },
   {
@@ -58,6 +43,7 @@ const defaultPosts = [
     likes: 15,
     comments: 1,
     saved: false,
+    liked: false,
     commentList: ["Portugal wide creators strong hain."],
   },
 ];
@@ -107,18 +93,51 @@ export default function CommunityPage() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    const currentUser = getCurrentUser();
     const savedProfile = localStorage.getItem(PROFILE_KEY);
     const savedPosts = localStorage.getItem(STORAGE_KEY);
     const savedFollowing = localStorage.getItem(FOLLOW_KEY);
 
+    const currentUserProfile = currentUser
+      ? {
+          username:
+            currentUser.name ||
+            currentUser.email?.split("@")[0] ||
+            "MatchMind User",
+          favoriteTeam: currentUser.favoriteTeam || "Brazil",
+          country: currentUser.country || "India",
+        }
+      : null;
+
     if (savedProfile) {
       const parsedProfile = JSON.parse(savedProfile);
-      setProfile(parsedProfile);
-      setSelectedTeam(parsedProfile.favoriteTeam || "Brazil");
+
+      if (
+        currentUserProfile &&
+        (!parsedProfile.username ||
+          parsedProfile.username === "MatchMind User" ||
+          parsedProfile.username === "Zaid")
+      ) {
+        localStorage.setItem(PROFILE_KEY, JSON.stringify(currentUserProfile));
+        setProfile(currentUserProfile);
+        setSelectedTeam(currentUserProfile.favoriteTeam || "Brazil");
+      } else {
+        setProfile(parsedProfile);
+        setSelectedTeam(parsedProfile.favoriteTeam || "Brazil");
+      }
+    } else if (currentUserProfile) {
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(currentUserProfile));
+      setProfile(currentUserProfile);
+      setSelectedTeam(currentUserProfile.favoriteTeam || "Brazil");
     }
 
     if (savedPosts) {
-      setPosts(JSON.parse(savedPosts));
+      const parsedPosts = JSON.parse(savedPosts);
+      const cleanedPosts = parsedPosts.filter(
+        (post) => String(post.name || "").toLowerCase() !== "zaid"
+      );
+      setPosts(cleanedPosts);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cleanedPosts));
     }
 
     if (savedFollowing) {
@@ -131,12 +150,12 @@ export default function CommunityPage() {
   useEffect(() => {
     if (loaded) {
       const safePosts = posts.map((post) => ({
-  ...post,
-  imageUrl: post.imageUrl?.startsWith("data:") ? "" : post.imageUrl,
-  videoUrl: post.videoUrl?.startsWith("data:") ? "" : post.videoUrl,
-}));
+        ...post,
+        imageUrl: post.imageUrl?.startsWith("data:") ? "" : post.imageUrl,
+        videoUrl: post.videoUrl?.startsWith("data:") ? "" : post.videoUrl,
+      }));
 
-localStorage.setItem(STORAGE_KEY, JSON.stringify(safePosts));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(safePosts));
       localStorage.setItem(FOLLOW_KEY, JSON.stringify(following));
     }
   }, [posts, following, loaded]);
@@ -168,7 +187,6 @@ localStorage.setItem(STORAGE_KEY, JSON.stringify(safePosts));
 
     if (clean.includes("ayan")) return "ayan";
     if (clean.includes("sara")) return "sara";
-    if (clean.includes("zaid")) return "zaid";
 
     return clean || "fan";
   }
@@ -220,6 +238,7 @@ localStorage.setItem(STORAGE_KEY, JSON.stringify(safePosts));
       likes: 0,
       comments: 0,
       saved: false,
+      liked: false,
       commentList: [],
     };
 
@@ -232,9 +251,17 @@ localStorage.setItem(STORAGE_KEY, JSON.stringify(safePosts));
 
   function likePost(id) {
     setPosts(
-      posts.map((post) =>
-        post.id === id ? { ...post, likes: post.likes + 1 } : post
-      )
+      posts.map((post) => {
+        if (post.id !== id) return post;
+
+        const liked = post.liked || false;
+
+        return {
+          ...post,
+          liked: !liked,
+          likes: liked ? Math.max(0, post.likes - 1) : post.likes + 1,
+        };
+      })
     );
   }
 
@@ -244,6 +271,27 @@ localStorage.setItem(STORAGE_KEY, JSON.stringify(safePosts));
         post.id === id ? { ...post, saved: !post.saved } : post
       )
     );
+  }
+
+  async function sharePost(post) {
+    const text = `${post.name}: ${post.text}`;
+    const url = `${window.location.origin}/community`;
+
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: "MatchMind AI Fan Post",
+          text,
+          url,
+        });
+        return;
+      }
+
+      await navigator.clipboard.writeText(`${text}\n${url}`);
+      alert("Post link copied.");
+    } catch {
+      alert("Share failed.");
+    }
   }
 
   function addComment(id) {
@@ -271,6 +319,22 @@ localStorage.setItem(STORAGE_KEY, JSON.stringify(safePosts));
   function resetCommunity() {
     localStorage.removeItem(STORAGE_KEY);
     localStorage.removeItem(FOLLOW_KEY);
+    localStorage.removeItem(PROFILE_KEY);
+
+    const currentUser = getCurrentUser();
+
+    const freshProfile = {
+      username:
+        currentUser?.name ||
+        currentUser?.email?.split("@")[0] ||
+        "MatchMind User",
+      favoriteTeam: currentUser?.favoriteTeam || "Brazil",
+      country: currentUser?.country || "India",
+    };
+
+    localStorage.setItem(PROFILE_KEY, JSON.stringify(freshProfile));
+    setProfile(freshProfile);
+    setSelectedTeam(freshProfile.favoriteTeam);
     setPosts(defaultPosts);
     setFollowing([]);
   }
@@ -457,7 +521,7 @@ localStorage.setItem(STORAGE_KEY, JSON.stringify(safePosts));
 
                     <div className="mt-6 flex flex-wrap gap-3">
                       <button type="button" onClick={() => likePost(post.id)} className="action-btn">
-                        ❤️ {post.likes}
+                        {post.liked ? "💙" : "❤️"} {post.likes}
                       </button>
 
                       <button type="button" className="action-btn">
@@ -478,7 +542,7 @@ localStorage.setItem(STORAGE_KEY, JSON.stringify(safePosts));
                         💬 Message
                       </Link>
 
-                      <button type="button" className="action-btn">
+                      <button type="button" onClick={() => sharePost(post)} className="action-btn">
                         🔁 Share
                       </button>
                     </div>
