@@ -81,15 +81,15 @@ export default function DashboardPage() {
           </Link>
 
          <nav className="mt-12 space-y-3">
-  <SideLink active href="/dashboard" label="Dashboard" />
-  <SideLink href="/analysis" label="Match Analysis" />
-  <SideLink href="/worldcup" label="🏆 World Cup 2026" />
-  <SideLink href="/community" label="🌍 Community" />
-  <SideLink href="/profile" label="👤 Profile" />
-  <SideLink href="/messages" label="💬 Messages" />
-  <SideLink href="/assistant" label="AI Assistant" />
-  <SideLink href="/history" label="Match History" />
-  <SideLink href="/settings" label="Settings" />
+  <SideLink active href="/dashboard" label="📊 Dashboard" />
+<SideLink href="/analysis" label="⚽ Match Analysis" />
+<SideLink href="/worldcup" label="🏆 World Cup 2026" />
+<SideLink href="/community" label="🌍 Community" />
+<SideLink href="/messages" label="💬 Messages" />
+<SideLink href="/profile" label="👤 Profile" />
+<SideLink href="/assistant" label="🤖 AI Assistant" />
+<SideLink href="/history" label="📜 Match History" />
+<SideLink href="/settings" label="⚙ Settings" />
 </nav>
 
           <div className="mt-12 rounded-[28px] border border-sky-400/20 bg-gradient-to-br from-sky-500/10 to-fuchsia-500/10 p-5 shadow-[0_0_45px_rgba(56,189,248,0.12)]">
