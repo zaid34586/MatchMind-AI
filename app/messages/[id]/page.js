@@ -27,16 +27,7 @@ const users = {
       { from: "You", text: "Yes, Ronaldo and Leao can create big moments." },
     ],
   },
-  zaid: {
-    id: "zaid",
-    name: "Zaid",
-    team: "Brazil",
-    country: "India",
-    messages: [
-      { from: "Zaid", text: "Brazil can surprise Argentina." },
-      { from: "You", text: "Brazil counter attack is dangerous." },
-    ],
-  },
+  
 };
 
 export default function DirectMessagePage() {
@@ -47,7 +38,7 @@ export default function DirectMessagePage() {
   const storageKey = useMemo(() => `matchmind-dm-${user.id}`, [user.id]);
 
   const [profile, setProfile] = useState({
-    username: "Zaid",
+    username: "MatchMind User",
     favoriteTeam: "Brazil",
     country: "India",
   });

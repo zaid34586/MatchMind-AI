@@ -20,7 +20,7 @@ const teams = [
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState({
-    username: "Zaid",
+    username: "MatchMind User",
     favoriteTeam: "Brazil",
     country: "India",
     bio: "Football fan, match predictor, and MatchMind community member.",

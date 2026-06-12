@@ -9,15 +9,24 @@ export default function DashboardPage() {
   const router = useRouter();
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const currentUser = getCurrentUser();
-    setUser(currentUser);
-  }, []);
+ useEffect(() => {
+  const currentUser = getCurrentUser();
+
+  if (!currentUser) {
+    router.replace("/signin");
+    return;
+  }
+
+  setUser(currentUser);
+}, [router]);
 
   function handleLogout() {
-    logoutUser();
-    router.push("/signin");
-  }
+  logoutUser();
+
+  window.history.pushState(null, "", "/signin");
+
+  router.replace("/signin");
+}
 
   return (
     <main className="min-h-screen bg-[#020617] text-white">

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const PROFILE_KEY = "matchmind-user-profile";
-
 const demoUsers = [
   {
     id: "ayan",
@@ -20,18 +19,11 @@ const demoUsers = [
     country: "India",
     lastMessage: "Portugal finishing is underrated.",
   },
-  {
-    id: "zaid",
-    name: "Zaid",
-    team: "Brazil",
-    country: "India",
-    lastMessage: "Brazil can surprise Argentina.",
-  },
 ];
 
 export default function MessagesPage() {
   const [profile, setProfile] = useState({
-    username: "Zaid",
+    username: "MatchMind User",
     favoriteTeam: "Brazil",
     country: "India",
   });

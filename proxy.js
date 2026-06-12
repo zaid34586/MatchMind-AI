@@ -4,15 +4,19 @@ export function proxy(request) {
   const authCookie = request.cookies.get("matchmind_auth");
   const isLoggedIn = authCookie?.value === "true";
 
+  const pathname = request.nextUrl.pathname;
+
   const protectedRoutes = [
     "/dashboard",
     "/analysis",
     "/assistant",
     "/history",
     "/settings",
+    "/community",
+    "/messages",
+    "/profile",
+    "/worldcup",
   ];
-
-  const pathname = request.nextUrl.pathname;
 
   const isProtected = protectedRoutes.some((route) =>
     pathname.startsWith(route)
@@ -32,5 +36,9 @@ export const config = {
     "/assistant/:path*",
     "/history/:path*",
     "/settings/:path*",
+    "/community/:path*",
+    "/messages/:path*",
+    "/profile/:path*",
+    "/worldcup/:path*",
   ],
 };

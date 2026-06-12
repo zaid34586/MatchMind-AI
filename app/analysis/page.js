@@ -488,6 +488,19 @@ function MatchMindBrain({ result }) {
         <PreviewCard title="Stability" value={result.brain.confidenceStability} />
         <PreviewCard title="Model Mode" value={result.brain.modelMode} />
       </div>
+      <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+  <p className="font-black text-sky-300">AI Method</p>
+  <p className="mt-3 leading-relaxed text-slate-300">
+    {result.brain.aiMethod}
+  </p>
+</div>
+
+<div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+  <p className="font-black text-sky-300">Explainability</p>
+  <p className="mt-3 leading-relaxed text-slate-300">
+    {result.brain.explainability}
+  </p>
+</div>
     </div>
   );
 }

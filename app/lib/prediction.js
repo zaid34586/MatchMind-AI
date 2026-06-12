@@ -550,11 +550,15 @@ trendSignal,
     },
 
     brain: {
-      factorsChecked: 24,
-      tacticalRules: 32,
-      confidenceStability: getConfidenceStability(confidence),
-      modelMode: "MatchMind Simulation AI v3",
-    },
+  factorsChecked: 24,
+  tacticalRules: 32,
+  confidenceStability: getConfidenceStability(confidence),
+  modelMode: "Rule-Based AI + Simulation Engine",
+  aiMethod:
+    "Weighted football intelligence model using attack, defense, form, possession, pressing, finishing, creativity, set pieces, rivalry pressure, momentum, and Monte Carlo-style simulation.",
+  explainability:
+    "Each prediction is explainable through visible factors such as win probability, confidence, tactical advantage, momentum, risk, and team strengths/weaknesses.",
+},
 
     finalVerdict: {
       title: winner === "Draw likely" ? "Balanced Match" : `${winner} Slight Favorite`,

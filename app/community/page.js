@@ -8,7 +8,7 @@ const STORAGE_KEY = "matchmind-community-posts";
 const FOLLOW_KEY = "matchmind-following-users";
 
 const defaultProfile = {
-  username: "Zaid",
+  username: "MatchMind User",
   favoriteTeam: "Brazil",
   country: "India",
 };
