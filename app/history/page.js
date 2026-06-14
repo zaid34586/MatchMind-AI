@@ -36,7 +36,7 @@ export default function HistoryPage() {
               href="/dashboard"
               className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-violet-400 to-fuchsia-400"
             >
-              MatchMind AI
+              PitchPal AI
             </Link>
 
             <p className="mt-5 font-black text-sky-400">Match History</p>

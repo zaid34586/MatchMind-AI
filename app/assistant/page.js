@@ -25,7 +25,7 @@ export default function AssistantPage() {
   const [messages, setMessages] = useState([
     {
       role: "ai",
-      text: "Hi Zaid 👋 I am your MatchMind AI football coach. Ask me anything about tactics, momentum, players, predictions, or fan-friendly match explanations.",
+      text: "Hi Zaid 👋 I am your PitchPal AI football coach. Ask me anything about tactics, momentum, players, predictions, or fan-friendly match explanations.",
     },
   ]);
 
@@ -189,7 +189,7 @@ function Header() {
           href="/dashboard"
           className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-violet-400 to-fuchsia-400"
         >
-          MatchMind AI
+          PitchPal AI
         </Link>
 
         <p className="mt-5 font-black text-sky-400">AI Football Assistant</p>

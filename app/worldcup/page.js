@@ -188,7 +188,7 @@ export default function WorldCupPage() {
               href="/dashboard"
               className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-violet-400 to-fuchsia-400"
             >
-              MatchMind AI
+              PitchPal AI
             </Link>
 
             <p className="mt-5 font-black text-sky-400">Phase 7 — World Cup 2026 Mode</p>
@@ -199,7 +199,7 @@ export default function WorldCupPage() {
 
             <p className="mt-4 max-w-4xl text-xl leading-relaxed text-slate-300">
               Predict group stage, knockouts, finalists, tournament winner, and
-              power rankings using MatchMind AI.
+              power rankings using PitchPal AI.
             </p>
           </div>
 

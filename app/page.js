@@ -14,7 +14,7 @@ export default function Home() {
             href="/"
             className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-400 to-fuchsia-400 lg:text-3xl"
           >
-            MatchMind AI
+            PitchPal AI
           </Link>
 
           <div className="hidden items-center gap-8 text-slate-300 lg:flex">
@@ -111,7 +111,7 @@ export default function Home() {
             </h1>
 
             <p className="mt-8 max-w-2xl text-2xl leading-relaxed text-slate-300">
-              MatchMind AI explains matches before, during, and after the game
+              PitchPal AI explains matches before, during, and after the game
               with tactical insights, predictions, summaries, and an AI football
               assistant.
             </p>
@@ -198,7 +198,7 @@ export default function Home() {
             Built like a real AI football workspace
           </h2>
           <p className="mt-5 text-xl text-slate-400">
-            Not just a chatbot. MatchMind AI gives structured match intelligence.
+            Not just a chatbot. PitchPal AI gives structured match intelligence.
           </p>
         </div>
 
@@ -313,7 +313,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-4">
           <div>
             <h3 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-fuchsia-400">
-              MatchMind AI
+              PitchPal AI
             </h3>
             <p className="mt-4 text-slate-400">
               AI-powered football companion for fans.

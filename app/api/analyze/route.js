@@ -25,7 +25,7 @@ export async function POST(request) {
     }
 
     const prompt = `
-You are MatchMind AI, an AI football match companion for fans.
+You are PitchPal AI, an AI football match companion for fans.
 
 Analyze this match:
 Home Team: ${homeTeam}
@@ -51,7 +51,7 @@ Keep it simple, practical, and easy for football fans to understand.
           Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
           "HTTP-Referer": "http://localhost:3000",
-          "X-Title": "MatchMind AI",
+          "X-Title": "PitchPal AI",
         },
         body: JSON.stringify({
           model: "ibm-granite/granite-4.1-8b",

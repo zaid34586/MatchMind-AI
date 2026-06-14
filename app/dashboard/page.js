@@ -38,7 +38,7 @@ export default function DashboardPage() {
       href="/dashboard"
       className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-violet-400 to-fuchsia-400"
     >
-      MatchMind AI
+      PitchPal AI
     </Link>
 
     <button
@@ -77,7 +77,7 @@ export default function DashboardPage() {
             href="/"
             className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-violet-400 to-fuchsia-400"
           >
-            MatchMind AI
+            PitchPal AI
           </Link>
 
          <nav className="mt-12 space-y-3">

@@ -30,7 +30,7 @@ export default function SettingsPage() {
               href="/"
               className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-violet-400 to-fuchsia-400"
             >
-              MatchMind AI
+              PitchPal AI
             </Link>
 
             <p className="mt-10 font-black text-sky-400">Account Settings</p>
@@ -38,7 +38,7 @@ export default function SettingsPage() {
               Security & Profile
             </h1>
             <p className="mt-4 max-w-3xl text-xl leading-relaxed text-slate-300">
-              Manage your MatchMind AI account, security status, and workspace
+              Manage your PitchPal AI account, security status, and workspace
               access.
             </p>
           </div>
